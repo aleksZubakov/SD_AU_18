@@ -2,9 +2,11 @@ import java.io.*;
 import java.util.List;
 
 public class FileComm extends Command {//Класс для команд работающих с файлами cat и wc
+
     FileComm(String cmd) {
         this.cmd = cmd;
     }
+
     PipedInputStream execute(List<Argument> args, PipedInputStream p) throws FileNotFoundException {//Метод выполняющий команду для входного потока pin, возвращает поток
         PipedOutputStream pout = new PipedOutputStream();
         PipedInputStream rss = new PipedInputStream();
@@ -17,7 +19,16 @@ public class FileComm extends Command {//Класс для команд рабо
             if (!args.isEmpty()) {
                 String fileName = args.get(0).arg;
                 try {
-                    FileInputStream file = new FileInputStream("src/" + fileName); //Посмотреть пути
+                    //Посмотреть пути
+                    String pathToFile = null;
+                    if (fileName.charAt(0) == '~' || fileName.charAt(0) == '/') {
+                        pathToFile = fileName;
+                    } else {
+                        pathToFile = Interpretator.getCurrentDirectory() +
+                                fileName;
+                    }
+
+                    FileInputStream file = new FileInputStream(pathToFile);
                     BufferedReader fReader = new BufferedReader(new InputStreamReader(file));
                     while (fReader.ready()) {
                         String str = fReader.readLine();
@@ -42,7 +53,7 @@ public class FileComm extends Command {//Класс для команд рабо
                         pout.flush();
                     }
                     streamReader.close();
-                pout.flush();
+                    pout.flush();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -51,7 +62,14 @@ public class FileComm extends Command {//Класс для команд рабо
             if (!args.isEmpty()) {
                 String fileName = args.get(0).arg;
                 try {
-                    InputStream file = new FileInputStream(fileName);
+                    String pathToFile = null;
+                    if (fileName.charAt(0) == '~' || fileName.charAt(0) == '/') {
+                        pathToFile = fileName;
+                    } else {
+                        pathToFile = Interpretator.getCurrentDirectory() + fileName;
+                    }
+
+                    InputStream file = new FileInputStream(pathToFile);
                     BufferedReader fReader = new BufferedReader(new InputStreamReader(file));
                     int count = 0;
                     int countWords = 0;
@@ -109,6 +127,9 @@ public class FileComm extends Command {//Класс для команд рабо
                 }
             }
         }
+
+
+
         try {
             pout.close();
         } catch (IOException e) {
@@ -116,5 +137,6 @@ public class FileComm extends Command {//Класс для команд рабо
         }
         return rss;
     }
+
     private String cmd;
 }

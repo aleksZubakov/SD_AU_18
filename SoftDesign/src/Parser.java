@@ -157,11 +157,11 @@ public class Parser {
     private Command buildCommand(String cmd) throws IllegalArgumentException {//Метод возвращающий класс комманды определенного типа
         if (cmd.equals("exit")) {
             return new Exit();
-        } else if (cmd.equals("cat") | cmd.equals("wc")) {
+        } else if (cmd.equals("cat") || cmd.equals("wc")) {
             return new FileComm(cmd);
         } else if (cmd.equals("pwd")) {
             return new NoArgsComm(cmd);
-        } else if (cmd.equals("echo")) {
+        } else if (cmd.equals("echo") || cmd.equals("ls") || cmd.equals("cd")) {
             return new ArgsComm(cmd);
         } else if (cmd.equals("=")) {
             return new ArgsComm("=");

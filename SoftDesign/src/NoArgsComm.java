@@ -16,7 +16,7 @@ public class NoArgsComm extends Command {//Класс для команды бе
         }
         if (cmd.equals("pwd")) {
             try {
-            pout.write((System.getProperty("user.dir")).getBytes());
+            pout.write(Interpretator.getCurrentDirectory().toString().getBytes());
             pout.write('\n');
             } catch (IOException e) {
                 e.printStackTrace();
