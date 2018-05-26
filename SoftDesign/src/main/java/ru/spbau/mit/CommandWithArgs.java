@@ -1,3 +1,5 @@
+package ru.spbau.mit;
+
 import java.util.List;
 
 public class CommandWithArgs {//Класс содержащий команду с ее аргументами

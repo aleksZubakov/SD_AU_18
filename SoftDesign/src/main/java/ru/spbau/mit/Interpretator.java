@@ -1,3 +1,5 @@
+package ru.spbau.mit;
+
 import java.io.*;
 import java.util.HashMap;
 import java.util.List;
@@ -7,11 +9,16 @@ public class Interpretator {
     public static final Map<String, Argument> variables = new HashMap<>();
 
 
-    private static final Directory currentDirectory = new Directory(System
+    private static Directory currentDirectory = new Directory(System
             .getProperty("user.dir"));
 
     public static Directory getCurrentDirectory() {
         return currentDirectory;
+    }
+
+    public static void resetDirectory() {
+        currentDirectory = new Directory(System
+                .getProperty("user.dir"));
     }
 
     public static String Interpret(InputStream is) {//Считываем вход, пока не будет exit

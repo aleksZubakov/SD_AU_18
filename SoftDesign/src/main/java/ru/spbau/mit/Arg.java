@@ -1,3 +1,5 @@
+package ru.spbau.mit;
+
 public class Arg extends Argument {//Класс для аргументов
     Arg(String str) {
         arg = str;

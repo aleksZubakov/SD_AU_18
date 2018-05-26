@@ -1,3 +1,5 @@
+package ru.spbau.mit;
+
 import java.io.*;
 import java.util.List;
 

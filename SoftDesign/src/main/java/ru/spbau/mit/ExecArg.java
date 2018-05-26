@@ -1,3 +1,5 @@
+package ru.spbau.mit;
+
 public class ExecArg extends Argument {//Аргументы которые требуют вычисления
     ExecArg(String str) {
         arg = str;

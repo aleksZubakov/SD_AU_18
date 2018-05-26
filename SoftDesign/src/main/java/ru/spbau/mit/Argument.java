@@ -1,3 +1,5 @@
+package ru.spbau.mit;
+
 public class Argument {//Базовый класс для аргументов
     String arg;
     String getValue() {//Строковое представление аргумента
